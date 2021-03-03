@@ -1,10 +1,10 @@
 'use strict'
 const MYSQL = require('mysql'),      
       CONNECTION = MYSQL.createConnection({
-        host: 'sql10.freemysqlhosting.net',
-        user: 'sql10394198',
-        password: 'K2Ak1gD9lw',
-        database: 'sql10394198'
+        host: process.env.HOST,
+        user: process.env.USER,
+        password: process.env.PASSWORD,
+        database: process.env.DB
       }),
       UTIL = require('util'),
       QY = UTIL.promisify(CONNECTION.query).bind(CONNECTION);
