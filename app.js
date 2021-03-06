@@ -15,7 +15,7 @@ const EXPRESS = require('express'),
           token = token.replace('Bearer ', '');
           JWT.verify(token, 'SSDf333/:f', (error, user) => {
             if (error){
-              res.status(413).send("Invalid Token.")
+              res.status(403).send("Invalid Token.")
             }; 
           });
           next();    
@@ -43,7 +43,7 @@ APP.route('/')
   try {
     res.status(200).send("You're in GET '/'");
   } catch (error) {
-    res.status(413).send(error.message);
+    res.status(400).send(error.message);
   };    
 });
 
@@ -52,7 +52,7 @@ APP.route('/signup')
   try {
     res.status(200).send("You're in GET '/sign-up'");
   } catch (error) {
-    res.status(413).send(error.message);
+    res.status(400).send(error.message);
   };  
 })
 .post(async (req, res) => {  
@@ -73,7 +73,7 @@ APP.route('/signup')
     res.status(200).send(data);
   }
   catch (error) {    
-    res.status(413).send(error.message);
+    res.status(400).send(error.message);
   };
 });
 
@@ -82,7 +82,7 @@ APP.route('/login')
   try {
     res.status(200).send("You're in GET '/login'");
   } catch (error) {
-      res.status(413).send(error.message);
+      res.status(400).send(error.message);
     }
 })
 .post(async (req, res) => {  
@@ -113,7 +113,7 @@ APP.route('/login')
   }
   catch (error) {
     console.log(error.message);
-    res.status(413).send(error.message);
+    res.status(400).send(error.message);
   }
 });
 
@@ -128,7 +128,7 @@ APP.route('/users')
     res.status(200).send(data);
   } catch (error) {
       console.log(error.message);
-      res.status(413).send(error.message);
+      res.status(400).send(error.message);
   };
 });
 
@@ -142,7 +142,7 @@ APP.route('/user/:id')
     };    
     res.status(200).send(data[0]);
   } catch (error) {      
-      res.status(413).send(error.message);
+      res.status(400).send(error.message);
   };
 })
 .put(async (req, res) => {
@@ -156,7 +156,7 @@ APP.route('/user/:id')
   }
   catch (error) {
     console.log(error.message);
-    res.status(413).send(error.message);
+    res.status(400).send(error.message);
   };
 })
 .delete(async (req, res) => {
@@ -171,12 +171,12 @@ APP.route('/user/:id')
     res.status(200).send("User Deleted.");
   }
   catch (error) {    
-    res.status(413).send(error.message);
+    res.status(400).send(error.message);
   };
 });
 
 APP.all('*', (req, res) => {  
-  res.status(404).send("That route is not implemented.");
+  res.status(501).send("That route is not implemented.");
 });
 
 APP.listen(PORT, (error) => {
